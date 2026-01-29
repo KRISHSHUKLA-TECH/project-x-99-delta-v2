@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shinchan's Rhythm Dance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#f0427c",
+              "background-light": "#f8f6f6",
+              "background-dark": "#221016",
+              "rhythm-red": "#ff4d4d",
+              "rhythm-yellow": "#ffcc00",
+              "rhythm-blue": "#4da6ff",
+              "rhythm-green": "#4dff88",
+            },
+            fontFamily: {
+              "display": ["Spline Sans", "sans-serif"]
+            },
+            borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+          },
+        },
+      }
+</script>
+<style>
+    body { font-family: 'Spline Sans', sans-serif; min-height: max(884px, 100dvh); }
+    .glass-panel {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .dark .glass-panel {
+        background: rgba(34, 16, 22, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .hit-animation { animation: pulse 0.1s ease-in-out; }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(0.9); } 100% { transform: scale(1); } }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col overflow-hidden font-display">
+
+<audio id="bg-music" src="dance_music.mp3" loop preload="auto"></audio>
+
+<div class="flex items-center bg-transparent p-4 pb-2 justify-between z-20">
+    <a href="index.html" class="text-[#181113] dark:text-white flex size-12 shrink-0 items-center justify-center rounded-full glass-panel cursor-pointer hover:bg-white/50 transition-colors">
+        <span class="material-symbols-outlined">arrow_back_ios_new</span>
+    </a>
+    <div class="flex-1 flex flex-col items-center">
+        <h2 class="text-[#181113] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Shinchan's Rhythm Dance</h2>
+        <p class="text-primary text-xs font-bold uppercase tracking-widest">Party Mode</p>
+    </div>
+    <div class="flex w-12 items-center justify-end">
+        <button onclick="toggleMute()" class="flex size-12 cursor-pointer items-center justify-center rounded-full glass-panel text-[#181113] dark:text-white">
+            <span id="mute-icon" class="material-symbols-outlined">volume_up</span>
+        </button>
+    </div>
+</div>
+
+<div class="relative flex-1 flex flex-col overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <div class="w-full h-full bg-cover bg-center opacity-80" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCQgh-hFEAwurqaZGQQgnLDhXBeQ-AyA9ly5ONjdl7AhOvUSfeEl29Aw1dLdxucgSXMXeTIlBjtssTOrKzIIJcoT0Lp3RNxrsZ7qLDIi__GNLirfHn2Aj8IEnEcnrnhKfvRHpOsWwiGwaUFADwGWx0lNBn67OmJpUaRl9X7i55k_JBSYO8LTQlMd06qrAutTwiYGuSphHPa6LYchu6wDYrCxlg59hUl3X5YF6bd43JZSgL5hVCI8vPbcFGAKRtzPihi1KgSz1FYIBI');"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-black/20 dark:from-black/40 dark:to-black/60"></div>
+    </div>
+
+    <div class="relative z-10 flex flex-wrap gap-4 p-4 mt-2">
+        <div class="flex min-w-[120px] flex-1 flex-col gap-1 rounded-xl p-4 glass-panel shadow-sm">
+            <p class="text-[#181113] dark:text-white/80 text-xs font-medium uppercase tracking-wider">Score</p>
+            <p id="score-display" class="text-primary tracking-light text-2xl font-bold leading-tight">0</p>
+        </div>
+        <div class="flex min-w-[120px] flex-1 flex-col gap-1 rounded-xl p-4 glass-panel shadow-sm border-2 border-primary/30">
+            <p class="text-[#181113] dark:text-white/80 text-xs font-medium uppercase tracking-wider">Combo</p>
+            <div class="flex items-baseline gap-1">
+                <p id="combo-display" class="text-primary tracking-light text-3xl font-black leading-tight">x0</p>
+                <span class="text-xs font-bold text-primary/70">STREAK!</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="relative flex-1 flex items-center justify-center z-10">
+        <div class="absolute inset-0 pointer-events-none">
+            <span class="material-symbols-outlined absolute text-rhythm-yellow text-4xl animate-bounce" style="top: 20%; left: 15%;">star</span>
+            <span class="material-symbols-outlined absolute text-rhythm-blue text-3xl opacity-60" style="top: 35%; right: 20%;">music_note</span>
+        </div>
+        <div id="shinchan-char" class="w-64 h-80 bg-contain bg-no-repeat bg-bottom transition-transform duration-100" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBKb0enrcju3XTFR0HRB9TDYaz5mYM7gr8EkGTuNM5_9ZP_67_ZxMEynsIl8YMZ4EOwEran-uGl__UBLEZvYojW9LTzBUU2UaKAiuRLFn5YAua0j0BGwfTH_6_Eu_ATS2GSXsXAiY9cHw-ooXLCQEUbVX89_hTTDmYSvzUFQOwY1nMWKwtccx9krffDKO3-SrE3JxTAcZYs2h5EkePySrMmuc-9J9EckY4XzmXhIetQQdttLBWZXNcUBDhchxREUqi923iJ9VB_lOo');"></div>
+    </div>
+
+    <div class="relative z-20 text-center pb-4 h-10">
+        <h3 id="feedback-text" class="text-primary text-4xl font-black italic tracking-tighter drop-shadow-md opacity-0 transition-opacity">PERFECT!</h3>
+    </div>
+
+    <div class="relative z-20 px-6 pb-12">
+        <div class="flex justify-between items-center gap-4 bg-black/10 dark:bg-white/10 p-6 rounded-xl backdrop-blur-md">
+            <button onclick="hitNote('red')" class="flex flex-col items-center gap-2 group transform active:scale-95 transition-transform">
+                <div class="w-16 h-16 rounded-full bg-rhythm-red shadow-[0_6px_0_0_#b30000] border-4 border-white/30 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-white text-3xl font-bold">circle</span>
+                </div>
+            </button>
+            <button onclick="hitNote('yellow')" class="flex flex-col items-center gap-2 group transform active:scale-95 transition-transform">
+                <div class="w-16 h-16 rounded-full bg-rhythm-yellow shadow-[0_6px_0_0_#b38f00] border-4 border-white/30 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-white text-3xl font-bold">change_history</span>
+                </div>
+            </button>
+            <button onclick="hitNote('blue')" class="flex flex-col items-center gap-2 group transform active:scale-95 transition-transform">
+                <div class="w-16 h-16 rounded-full bg-rhythm-blue shadow-[0_6px_0_0_#0059b3] border-4 border-white/30 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-white text-3xl font-bold">square</span>
+                </div>
+            </button>
+            <button onclick="hitNote('green')" class="flex flex-col items-center gap-2 group transform active:scale-95 transition-transform">
+                <div class="w-16 h-16 rounded-full bg-rhythm-green shadow-[0_6px_0_0_#00b33c] border-4 border-white/30 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-white text-3xl font-bold">grade</span>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="bg-white/80 dark:bg-background-dark/80 backdrop-blur-xl border-t border-gray-200 dark:border-white/10 px-8 py-4 pb-8 flex justify-between items-center z-30">
+    <a href="index.html" class="flex flex-col items-center gap-1 text-primary">
+        <span class="material-symbols-outlined fill-1">home</span>
+        <span class="text-[10px] font-bold uppercase">Home</span>
+    </a>
+    <a href="index.html#beats" class="flex flex-col items-center gap-1 text-gray-400 dark:text-white/40">
+        <span class="material-symbols-outlined">library_music</span>
+        <span class="text-[10px] font-bold uppercase">Songs</span>
+    </a>
+    <a href="doremon_lab.html" class="flex flex-col items-center gap-1 text-gray-400 dark:text-white/40">
+        <span class="material-symbols-outlined">shopping_bag</span>
+        <span class="text-[10px] font-bold uppercase">Shop</span>
+    </a>
+    <a href="last.html" class="flex flex-col items-center gap-1 text-gray-400 dark:text-white/40">
+        <span class="material-symbols-outlined">photo_library</span>
+        <span class="text-[10px] font-bold uppercase">Memories</span>
+    </a>
+</div>
+
+<script>
+    let score = 0;
+    let combo = 0;
+    let gameStarted = false;
+    
+    const music = document.getElementById('bg-music');
+    const scoreEl = document.getElementById('score-display');
+    const comboEl = document.getElementById('combo-display');
+    const feedbackEl = document.getElementById('feedback-text');
+    const charEl = document.getElementById('shinchan-char');
+    const muteIcon = document.getElementById('mute-icon');
+
+    function hitNote(color) {
+        if (!gameStarted) {
+            music.play().catch(error => {
+                console.log("Audio play failed, requires user interaction first.");
+            });
+            gameStarted = true;
+        }
+
+        score += 150;
+        combo++;
+        scoreEl.innerText = score.toLocaleString();
+        comboEl.innerText = 'x' + combo;
+
+        feedbackEl.style.opacity = '1';
+        feedbackEl.innerText = ['PERFECT!', 'GREAT!', 'AMAZING!'][Math.floor(Math.random()*3)];
+        feedbackEl.style.transform = 'scale(1.2)';
+        
+        setTimeout(() => {
+            feedbackEl.style.opacity = '0';
+            feedbackEl.style.transform = 'scale(1)';
+        }, 500);
+
+        const rotation = Math.random() > 0.5 ? '5deg' : '-5deg';
+        charEl.style.transform = `scale(1.1) rotate(${rotation})`;
+        setTimeout(() => {
+            charEl.style.transform = 'scale(1) rotate(0deg)';
+        }, 150);
+    }
+
+    function toggleMute() {
+        if (music.paused) {
+            music.play();
+            muteIcon.innerText = "volume_up";
+        } else {
+            music.pause();
+            muteIcon.innerText = "volume_off";
+        }
+    }
+</script>
+</body>
+</html>

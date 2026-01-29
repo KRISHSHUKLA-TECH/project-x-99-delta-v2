@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Birthday Surprise Box</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f0427c",
+                        "accent-yellow": "#FFD700",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221016",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { min-height: max(884px, 100dvh); }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .dark .glass-effect {
+            background: rgba(34, 16, 22, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gift-glow {
+            box-shadow: 0 0 50px 10px rgba(240, 66, 124, 0.3);
+        }
+        .reveal-anim {
+            animation: bounceOpen 0.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+        }
+        @keyframes bounceOpen {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1) rotate(5deg); }
+            70% { transform: scale(1.1) rotate(-5deg); }
+            100% { transform: scale(1) rotate(0); }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display min-h-screen flex flex-col overflow-x-hidden">
+
+<header class="flex items-center bg-white/80 dark:bg-background-dark/80 backdrop-blur-md p-4 sticky top-0 z-50">
+    <a href="index.html" class="text-[#181113] dark:text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition-colors cursor-pointer">
+        <span class="material-symbols-outlined">arrow_back_ios_new</span>
+    </a>
+    <h2 class="text-[#181113] dark:text-white text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-10">Birthday Surprise Box</h2>
+</header>
+
+<main class="flex-1 flex flex-col items-center justify-center p-4 relative overflow-hidden">
+    <div class="absolute top-10 left-10 w-24 h-24 bg-primary/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 right-10 w-32 h-32 bg-accent-yellow/20 rounded-full blur-3xl"></div>
+
+    <div class="w-full max-w-md">
+        <h2 id="headline" class="text-[#181113] dark:text-white tracking-tight text-[32px] font-bold leading-tight px-4 text-center pb-8 pt-5 transition-all duration-300">
+            Tap to Unbox Your Reward!
+        </h2>
+    </div>
+
+    <div onclick="revealMessage()" id="gift-box-container" class="relative w-full aspect-square max-w-[320px] flex items-center justify-center mb-8 cursor-pointer active:scale-95 transition-transform">
+        <div class="absolute inset-0 flex items-center justify-center scale-150 opacity-40">
+            <svg class="w-full h-full fill-primary dark:fill-primary/60" viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100 0L110 90L200 100L110 110L100 200L90 110L0 100L90 90Z"></path>
+            </svg>
+        </div>
+        <div class="relative z-10 w-full h-full flex items-center justify-center gift-glow rounded-xl">
+            <div class="w-full h-full bg-center bg-no-repeat bg-contain" data-alt="A magical 3D pink gift box with yellow ribbons" style='background-image: url("i16.png");'>
+            </div>
+        </div>
+        <div class="absolute top-0 left-0 text-primary opacity-60 animate-bounce"><span class="material-symbols-outlined text-4xl">celebration</span></div>
+        <div class="absolute bottom-10 right-0 text-accent-yellow opacity-60 animate-pulse"><span class="material-symbols-outlined text-4xl">star</span></div>
+        <div class="absolute top-20 right-5 text-blue-400 opacity-60"><span class="material-symbols-outlined text-3xl">token</span></div>
+    </div>
+
+    <div class="w-full max-w-md">
+        <h4 class="text-primary dark:text-primary/80 text-sm font-bold leading-normal tracking-widest px-4 py-2 text-center uppercase">
+            Special Birthday Message
+        </h4>
+    </div>
+
+    <div class="w-full max-w-[480px] px-4 pb-24">
+        <div id="msg-panel" class="flex flex-col items-center gap-4 rounded-xl glass-effect p-6 text-center transition-all duration-500">
+            <div class="flex flex-col gap-2">
+                <div class="flex justify-center mb-2">
+                    <span id="lock-icon" class="material-symbols-outlined text-primary text-4xl transition-all duration-500">lock_open</span>
+                </div>
+                <p id="msg-title" class="text-[#181113] dark:text-white text-xl font-bold leading-tight transition-all duration-300">Your Message is Waiting...</p>
+                <div id="msg-body" class="text-[#89616f] dark:text-gray-400 text-base font-normal leading-normal transition-all duration-300">
+                    Doraemon and Shinchan have left something special for you! Tap the box to reveal your secret birthday wish.
+                </div>
+            </div>
+            <button onclick="revealMessage()" id="reveal-btn" class="mt-4 flex w-full max-w-[240px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-8 bg-primary text-white text-base font-bold leading-normal shadow-lg shadow-primary/30 active:scale-95 transition-transform">
+                <span class="truncate">Reveal Now</span>
+            </button>
+        </div>
+    </div>
+</main>
+
+<div class="fixed bottom-24 left-4 size-16 bg-white dark:bg-gray-800 rounded-full border-4 border-primary/20 p-1 overflow-hidden shadow-lg hover:scale-110 transition-transform">
+    <div class="w-full h-full bg-cover bg-center" style='background-image: url("i17.png");'></div>
+</div>
+<div class="fixed bottom-24 right-4 size-16 bg-white dark:bg-gray-800 rounded-full border-4 border-accent-yellow/20 p-1 overflow-hidden shadow-lg hover:scale-110 transition-transform">
+    <div class="w-full h-full bg-cover bg-center" style='background-image: url("i18.png");'></div>
+</div>
+
+<nav class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-background-dark/90 backdrop-blur-lg border-t border-gray-200 dark:border-white/10 px-6 pb-8 pt-3 flex justify-between items-center z-50">
+    <a href="index.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-primary transition-colors">
+        <span class="material-symbols-outlined text-[28px]">home</span>
+        <span class="text-[10px] font-medium">Home</span>
+    </a>
+    <div class="flex flex-col items-center gap-1 text-primary">
+        <div class="bg-primary/10 rounded-full px-4 py-1 flex flex-col items-center">
+            <span class="material-symbols-outlined text-[28px] fill-current">redeem</span>
+        </div>
+        <span class="text-[10px] font-bold">Surprise</span>
+    </div>
+    <a href="index.html#fun-zone" class="flex flex-col items-center gap-1 text-gray-400 hover:text-primary transition-colors">
+        <span class="material-symbols-outlined text-[28px]">sports_esports</span>
+        <span class="text-[10px] font-medium">Games</span>
+    </a>
+    <a href="last.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-primary transition-colors">
+        <span class="material-symbols-outlined text-[28px]">photo_library</span>
+        <span class="text-[10px] font-medium">Memories</span>
+    </a>
+</nav>
+
+<div class="fixed bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-gray-300 dark:bg-gray-700 rounded-full z-[60]"></div>
+
+<script>
+    let isRevealed = false;
+
+    function revealMessage() {
+        if(isRevealed) return; 
+        isRevealed = true;
+
+        const title = document.getElementById('msg-title');
+        const body = document.getElementById('msg-body');
+        const icon = document.getElementById('lock-icon');
+        const btn = document.getElementById('reveal-btn');
+        const box = document.getElementById('gift-box-container');
+        const headline = document.getElementById('headline');
+
+      
+        box.classList.add('reveal-anim');
+        
+      
+        headline.innerText = "🎉 SURPRISE UNLOCKED! 🎉";
+        headline.classList.add('text-primary');
+
+        icon.innerText = "cake"; 
+        icon.classList.remove('text-primary');
+        icon.classList.add('text-accent-yellow', 'scale-125'); 
+
+
+        title.innerText = "Happy Birthday Samjiizz!";
+        
+
+        body.innerHTML = `
+            <div class="animate-pulse mt-2">
+                <p class="font-bold text-lg text-primary">✨ You are the bestestestest! ✨</p>
+                <p class="mt-3 text-sm text-[#181113] dark:text-white/90">
+                    May your year be filled with as much joy as Shinchan's dance and as many solutions as Doraemon's pocket!
+
+                    May Godjii flourish this year with lotzz of gifts and surpriseszz for thee, may Godjiii bless thee with dherr saari internship offers, dherr saari khushiness, dherr saari cgpa, dherr saare paise, taaki mujhe bohot saari party mile.
+                    May Godjii punish each and every trouble and sadness causing sources and throw them miles away from thy life and make it as beautiful as laughing buddha's smile.!!
+                </p>
+                <p class="mt-4 text-xs text-gray-500 font-bold uppercase tracking-widest">
+                    Sending virtual blessings & tech magic!
+                </p>
+            </div>
+        `;
+
+
+        btn.style.opacity = '0';
+        setTimeout(() => btn.style.display = 'none', 300);
+        
+
+        setTimeout(() => box.classList.remove('reveal-anim'), 1000);
+    }
+</script>
+</body>
+</html>

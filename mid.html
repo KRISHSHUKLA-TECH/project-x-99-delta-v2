@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Connected Character Fun Zone</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f0427c",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221016",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            html {
+                scroll-behavior: smooth;
+            }
+        }
+        body {
+            font-family: 'Spline Sans', sans-serif;
+        }
+        .confetti-bg {
+            background-image: radial-gradient(circle at 2px 2px, #f0427c33 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+        .gold-shimmer {
+            background: linear-gradient(45deg, #ffd700 0%, #fff9e6 50%, #ffd700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px) rotateY(5deg);
+            box-shadow: 0 20px 25px -5px rgba(240, 66, 124, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display overflow-x-hidden min-h-screen">
+    <header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10 px-4 md:px-20 py-3">
+        <div class="max-w-[1200px] mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="p-2 bg-primary rounded-full text-white">
+                    <span class="material-symbols-outlined">celebration</span>
+                </div>
+                <h2 class="text-[#181113] dark:text-white text-xl font-bold leading-tight tracking-tight">Connected Fun Zone</h2>
+            </div>
+            <div class="hidden md:flex items-center gap-8">
+                <a class="text-[#181113] dark:text-gray-200 text-sm font-semibold hover:text-primary transition-colors" href="index.html">Home</a>
+                <a class="text-[#181113] dark:text-gray-200 text-sm font-semibold hover:text-primary transition-colors" href="#character-grid">Characters</a>
+                <a class="text-[#181113] dark:text-gray-200 text-sm font-semibold hover:text-primary transition-colors" href="#balloon-game">Game</a>
+                <a class="text-[#181113] dark:text-gray-200 text-sm font-semibold hover:text-primary transition-colors" href="#photo-gallery">Gallery</a>
+                <button onclick="revealGift()" class="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-primary/20 transition-all active:scale-95">
+                    Surprise Gift
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="fixed right-8 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-4">
+        <a class="w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-xl border border-primary/20 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all scale-100 hover:scale-110" href="#hero">
+            <span class="material-symbols-outlined">keyboard_arrow_up</span>
+        </a>
+        <a class="w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-xl border border-primary/20 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all scale-100 hover:scale-110" href="#photo-gallery">
+            <span class="material-symbols-outlined">keyboard_arrow_down</span>
+        </a>
+    </div>
+
+    <main class="pt-24 pb-20 confetti-bg">
+        <section class="max-w-[960px] mx-auto text-center px-4 mb-20 scroll-mt-32" id="hero">
+            <h1 class="text-[#181113] dark:text-white tracking-tight text-5xl md:text-6xl font-bold leading-tight pb-4">
+                Happy Birthday! <br/>
+                <span class="gold-shimmer">Doraemon & Shinchan World</span>
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
+                Explore the playful 3D zone of your favorite characters. Pop the balloons and see them dance!
+            </p>
+        </section>
+
+        <section class="max-w-[1100px] mx-auto px-4 mb-32 scroll-mt-32" id="character-grid">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div onclick="charInteract('Doraemon')" class="card-hover bg-white dark:bg-gray-800 rounded-xl p-4 border-2 border-transparent hover:border-primary group cursor-pointer">
+                    <div class="aspect-square rounded-lg bg-blue-50 dark:bg-blue-900/20 mb-4 overflow-hidden flex items-center justify-center relative">
+                        <img alt="Doraemon 3D" class="w-40 h-40 object-contain group-hover:scale-110 transition-transform duration-500" src="i2.png"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-primary">Special Edition</span>
+                            <h3 class="text-lg font-bold text-[#181113] dark:text-white">Doraemon Twirl</h3>
+                        </div>
+                        <span class="material-symbols-outlined text-primary group-hover:rotate-180 transition-transform duration-500">refresh</span>
+                    </div>
+                </div>
+
+                <div onclick="charInteract('Shinchan')" class="card-hover bg-white dark:bg-gray-800 rounded-xl p-4 border-2 border-transparent hover:border-primary group cursor-pointer">
+                    <div class="aspect-square rounded-lg bg-red-50 dark:bg-red-900/20 mb-4 overflow-hidden flex items-center justify-center relative">
+                        <img alt="Shinchan 3D" class="w-40 h-40 object-contain group-hover:-translate-y-4 transition-transform duration-300" src="i3.png"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-primary">Limited</span>
+                            <h3 class="text-lg font-bold text-[#181113] dark:text-white">Shinchan Jump</h3>
+                        </div>
+                        <span class="material-symbols-outlined text-primary">rocket_launch</span>
+                    </div>
+                </div>
+
+                <div onclick="charInteract('Door')" class="card-hover bg-white dark:bg-gray-800 rounded-xl p-4 border-2 border-transparent hover:border-primary group cursor-pointer">
+                    <div class="aspect-square rounded-lg bg-blue-50 dark:bg-blue-900/20 mb-4 overflow-hidden flex items-center justify-center relative">
+                        <img alt="Doraemon Door" class="w-40 h-40 object-contain group-hover:scale-105 transition-transform duration-500" src="i6.png"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-primary">Rare</span>
+                            <h3 class="text-lg font-bold text-[#181113] dark:text-white">Anywhere Door</h3>
+                        </div>
+                        <span class="material-symbols-outlined text-primary">sensor_door</span>
+                    </div>
+                </div>
+
+                <div onclick="charInteract('Mask')" class="card-hover bg-white dark:bg-gray-800 rounded-xl p-4 border-2 border-transparent hover:border-primary group cursor-pointer">
+                    <div class="aspect-square rounded-lg bg-red-50 dark:bg-red-900/20 mb-4 overflow-hidden flex items-center justify-center relative">
+                        <img alt="Shinchan Action Mask" class="w-40 h-40 object-contain group-hover:brightness-110 transition-all duration-300" src="i7.png"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-primary">Super Hero</span>
+                            <h3 class="text-lg font-bold text-[#181113] dark:text-white">Action Mask</h3>
+                        </div>
+                        <span class="material-symbols-outlined text-primary">shield</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-[960px] mx-auto px-4 py-12 bg-white/40 dark:bg-gray-800/40 rounded-xl backdrop-blur-sm border border-white/50 relative overflow-hidden mb-32 scroll-mt-32" id="balloon-game">
+            <div class="relative z-10 text-center mb-8">
+                <h2 class="text-[#181113] dark:text-white text-3xl font-bold mb-2">Pop the Balloon Challenge!</h2>
+                <p id="game-status" class="text-gray-600 dark:text-gray-400">Can you catch them all before they fly away?</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-6 mb-12">
+                <div class="bg-white/80 dark:bg-gray-900/80 px-8 py-4 rounded-xl shadow-sm border border-primary/10 flex flex-col items-center">
+                    <span class="text-sm text-gray-500 font-medium">Popped</span>
+                    <span id="score" class="text-3xl font-bold text-primary">0</span>
+                </div>
+                <div class="bg-white/80 dark:bg-gray-900/80 px-8 py-4 rounded-xl shadow-sm border border-primary/10 flex flex-col items-center">
+                    <span class="text-sm text-gray-500 font-medium">Timer</span>
+                    <span id="timer" class="text-3xl font-bold text-[#181113] dark:text-white">00:45</span>
+                </div>
+                <div class="bg-white/80 dark:bg-gray-900/80 px-8 py-4 rounded-xl shadow-sm border border-primary/10 flex flex-col items-center">
+                    <span class="text-sm text-gray-500 font-medium">Rank</span>
+                    <span class="text-3xl font-bold gold-shimmer italic">Noob</span>
+                </div>
+            </div>
+            <div id="game-area" class="relative h-[400px] w-full bg-gradient-to-b from-blue-50/50 to-pink-50/50 dark:from-blue-900/10 dark:to-pink-900/10 rounded-xl border-2 border-dashed border-primary/20 flex items-center justify-center cursor-crosshair overflow-hidden">
+                
+                <div class="absolute left-10 top-20 cursor-pointer group" onclick="popBalloon(this)">
+                    <div class="w-12 h-16 bg-primary rounded-full relative shadow-lg group-active:scale-150 group-active:opacity-0 transition-all duration-200">
+                        <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-0.5 h-10 bg-primary/40"></div>
+                    </div>
+                </div>
+                <div class="absolute right-20 bottom-20 cursor-pointer group" onclick="popBalloon(this)">
+                    <div class="w-14 h-18 bg-blue-400 rounded-full relative shadow-lg group-active:scale-150 group-active:opacity-0 transition-all duration-200">
+                        <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-0.5 h-10 bg-blue-400/40"></div>
+                    </div>
+                </div>
+
+                <button id="start-btn" onclick="startGame()" class="relative z-10 bg-primary text-white text-lg font-bold px-10 py-4 rounded-full shadow-2xl hover:scale-105 transition-transform flex items-center gap-2">
+                    <span class="material-symbols-outlined">play_arrow</span>
+                    Start Popping!
+                </button>
+            </div>
+        </section>
+
+        <section class="max-w-[1100px] mx-auto px-4 py-20 scroll-mt-32" id="photo-gallery">
+            <div class="text-center mb-12">
+                <h2 class="text-[#181113] dark:text-white text-4xl font-bold mb-4">Memory Photo Gallery</h2>
+                <div class="h-1 w-24 bg-primary mx-auto rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="aspect-[4/3] bg-white dark:bg-gray-800 rounded-xl border-4 border-white dark:border-gray-700 shadow-xl overflow-hidden group">
+                    <img alt="Birthday Memory" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="i8.png"/>
+                </div>
+                <div class="aspect-[4/3] bg-white dark:bg-gray-800 rounded-xl border-4 border-white dark:border-gray-700 shadow-xl overflow-hidden group">
+                    <img alt="Birthday Celebration" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="i9.png"/>
+                </div>
+                <div class="aspect-[4/3] bg-white dark:bg-gray-800 rounded-xl border-4 border-white dark:border-gray-700 shadow-xl overflow-hidden group">
+                    <img alt="Party Decor" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="i10.png"/>
+                </div>
+            </div>
+        </section>
+    </main>
+    <nav class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-[#181113]/90 dark:bg-white/10 backdrop-blur-xl px-2 py-2 rounded-full border border-white/10 shadow-2xl z-50">
+        <div class="flex items-center gap-1">
+            <a class="p-4 text-white hover:bg-primary rounded-full transition-colors flex items-center justify-center" href="#hero">
+                <span class="material-symbols-outlined">home</span>
+            </a>
+            <a class="p-4 text-white hover:bg-primary rounded-full transition-colors flex items-center justify-center" href="#character-grid">
+                <span class="material-symbols-outlined">grid_view</span>
+            </a>
+            <div class="p-4 bg-primary text-white rounded-full shadow-lg shadow-primary/40 flex items-center justify-center scale-110 mx-2">
+                <span class="material-symbols-outlined">cake</span>
+            </div>
+            <a class="p-4 text-white hover:bg-primary rounded-full transition-colors flex items-center justify-center" href="#balloon-game">
+                <span class="material-symbols-outlined">videogame_asset</span>
+            </a>
+            <a class="p-4 text-white hover:bg-primary rounded-full transition-colors flex items-center justify-center" href="#photo-gallery">
+                <span class="material-symbols-outlined">photo_library</span>
+            </a>
+        </div>
+    </nav>
+
+    <script>
+        function charInteract(char) {
+            if(char === 'Doraemon' || char === 'Door') {
+                window.location.href = 'doremon_lab.html';
+            } else if(char === 'Shinchan' || char === 'Mask') {
+                window.location.href = 'dance.html';
+            }
+        }
+
+        function revealGift() {
+            window.location.href = 'box.html';
+        }
+
+        let score = 0;
+        let timeLeft = 45;
+        let gameActive = false;
+        let timerId;
+
+        const scoreEl = document.getElementById('score');
+        const timerEl = document.getElementById('timer');
+        const startBtn = document.getElementById('start-btn');
+        const gameArea = document.getElementById('game-area');
+        const gameStatus = document.getElementById('game-status');
+
+        function startGame() {
+            if(gameActive) return;
+            gameActive = true;
+            score = 0;
+            timeLeft = 45;
+            scoreEl.innerText = score;
+            timerEl.innerText = "00:45";
+            startBtn.style.display = "none";
+            gameStatus.innerText = "Tap on the game area to catch invisible balloons!";
+
+            const balloonInterval = setInterval(createBalloon, 800);
+
+            timerId = setInterval(() => {
+                timeLeft--;
+                timerEl.innerText = `00:${timeLeft < 10 ? '0'+timeLeft : timeLeft}`;
+                if (timeLeft <= 0) {
+                    clearInterval(timerId);
+                    clearInterval(balloonInterval);
+                    gameActive = false;
+                    startBtn.style.display = "flex";
+                    startBtn.innerHTML = `<span class="material-symbols-outlined">replay</span> Play Again`;
+                    gameStatus.innerText = `Game Over! Final Score: ${score}`;
+                    alert(`Time's up! You popped ${score} balloons!`);
+                }
+            }, 1000);
+        }
+
+        function createBalloon() {
+            if(!gameActive) return;
+            const balloon = document.createElement('div');
+        
+            const colors = ['bg-red-400', 'bg-blue-400', 'bg-yellow-400', 'bg-green-400', 'bg-primary'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            balloon.className = `absolute w-12 h-16 ${color} rounded-full shadow-lg cursor-pointer transform hover:scale-110 transition-transform`;
+            
+            balloon.style.left = Math.random() * 80 + 10 + '%';
+            balloon.style.top = Math.random() * 70 + 10 + '%';
+            
+            const string = document.createElement('div');
+            string.className = "absolute -bottom-4 left-1/2 -translate-x-1/2 w-0.5 h-10 bg-black/20";
+            balloon.appendChild(string);
+
+            balloon.onclick = function() {
+                if(!gameActive) return;
+                score++;
+                scoreEl.innerText = score;
+                this.remove();
+            };
+
+            gameArea.appendChild(balloon);
+
+            setTimeout(() => {
+                if(balloon.parentNode) balloon.remove();
+            }, 2000);
+        }
+
+        function popBalloon(el) {
+            if(!gameActive) {
+                alert("Click 'Start Popping' first!");
+                return;
+            }
+            score++;
+            scoreEl.innerText = score;
+            el.style.opacity = '0';
+            setTimeout(() => {
+                el.style.opacity = '1';
+                el.style.left = Math.random() * 80 + '%';
+                el.style.top = Math.random() * 80 + '%';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

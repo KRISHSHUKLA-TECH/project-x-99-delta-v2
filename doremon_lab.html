@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Doraemon's Lab Gadgets</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#f0427c",
+              "background-light": "#f8f6f6",
+              "background-dark": "#221016",
+              "doraemon-blue": "#00A0E9",
+            },
+            fontFamily: {
+              "display": ["Spline Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+</script>
+<style>
+    .blueprint-bg {
+        background-image: radial-gradient(circle at 2px 2px, rgba(0, 160, 233, 0.05) 1px, transparent 0);
+        background-size: 24px 24px;
+    }
+    body { min-height: max(884px, 100dvh); }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display min-h-screen flex flex-col overflow-x-hidden">
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
+<div class="flex items-center p-4 justify-between max-w-md mx-auto">
+<a href="index.html" class="text-doraemon-blue flex size-10 items-center justify-center bg-doraemon-blue/10 rounded-full hover:bg-doraemon-blue hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</a>
+<div class="flex flex-col items-center">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-yellow-400 fill-1">notifications_active</span>
+<h2 class="text-[#181113] dark:text-white text-lg font-bold leading-tight tracking-tight">Doraemon's Lab</h2>
+</div>
+<span class="text-[10px] uppercase tracking-widest text-doraemon-blue font-bold">Future Tech Lab</span>
+</div>
+<div class="flex w-10 items-center justify-end">
+<button class="flex size-10 cursor-pointer items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-[#181113] dark:text-white">
+<span class="material-symbols-outlined text-2xl" data-icon="Settings">settings</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-1 w-full max-w-md mx-auto blueprint-bg pb-24">
+<section class="px-6 py-8 relative">
+<div class="absolute top-4 right-10 text-doraemon-blue/20">
+<span class="material-symbols-outlined text-6xl rotate-12">architecture</span>
+</div>
+<h2 class="text-[#181113] dark:text-white tracking-tight text-3xl font-extrabold leading-tight">Gadget Collection</h2>
+<p class="text-[#89616f] dark:text-gray-400 text-sm font-medium mt-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary">auto_awesome</span>
+Explore 22nd Century Innovations
+</p>
+</section>
+<div class="px-4 space-y-6">
+<div class="group relative bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 dark:border-gray-800 p-4 transition-all hover:shadow-xl">
+<div class="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-800/20 mb-4">
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-32 h-48 bg-primary rounded-sm border-4 border-white shadow-2xl relative">
+<div class="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 bg-yellow-400 rounded-full border border-primary"></div>
+</div>
+</div>
+<div class="absolute inset-0 bg-center bg-no-repeat bg-cover opacity-20" data-alt="Futuristic glowing door blueprint design" style='background-image: url("i11.png");'></div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-start">
+<h3 class="text-[#181113] dark:text-white text-xl font-bold tracking-tight">Anywhere Door</h3>
+<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded-full uppercase">Legendary</span>
+</div>
+<p class="text-[#89616f] dark:text-gray-400 text-sm leading-relaxed">Travel anywhere in the blink of an eye! Just think of your destination.</p>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-white bg-blue-400 flex items-center justify-center text-[8px] text-white font-bold">D</div>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-yellow-400 flex items-center justify-center text-[8px] text-white font-bold">N</div>
+</div>
+<button onclick="activateGadget('Anywhere Door')" class="flex items-center gap-2 px-6 py-2 bg-primary text-white rounded-full font-bold text-sm shadow-lg shadow-primary/30 active:scale-95 transition-transform">
+<span>Try Gadget</span>
+<span class="material-symbols-outlined text-sm">bolt</span>
+</button>
+</div>
+</div>
+</div>
+<div class="group relative bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 dark:border-gray-800 p-4 transition-all hover:shadow-xl">
+<div class="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 mb-4">
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-8xl text-yellow-500/80 drop-shadow-lg">water_pump</span>
+</div>
+<div class="absolute inset-0 bg-center bg-no-repeat bg-cover opacity-10" data-alt="Technical schematic for flying devices" style='background-image: url("i12.png");'></div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-start">
+<h3 class="text-[#181113] dark:text-white text-xl font-bold tracking-tight">Bamboo Copter</h3>
+<span class="px-2 py-1 bg-doraemon-blue/10 text-doraemon-blue text-[10px] font-bold rounded-full uppercase">Most Used</span>
+</div>
+<p class="text-[#89616f] dark:text-gray-400 text-sm leading-relaxed">Take to the skies and see the world! Propel yourself into a new adventure.</p>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex items-center gap-1 text-yellow-500">
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="text-xs font-bold">4.9 Rare Tech</span>
+</div>
+<button onclick="activateGadget('Bamboo Copter')" class="flex items-center gap-2 px-6 py-2 bg-primary text-white rounded-full font-bold text-sm shadow-lg shadow-primary/30 active:scale-95 transition-transform">
+<span>Try Gadget</span>
+<span class="material-symbols-outlined text-sm">flight</span>
+</button>
+</div>
+</div>
+</div>
+<div class="group relative bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 dark:border-gray-800 p-4 transition-all hover:shadow-xl">
+<div class="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 mb-4">
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-32 h-24 bg-gray-300 dark:bg-gray-600 rounded-lg shadow-inner flex items-center justify-center border-b-4 border-gray-400">
+<span class="material-symbols-outlined text-4xl text-gray-500">translate</span>
+</div>
+</div>
+<div class="absolute inset-0 bg-center bg-no-repeat bg-cover opacity-10" data-alt="Neural network translation visualization" style='background-image: url("i13.png");'></div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-start">
+<h3 class="text-[#181113] dark:text-white text-xl font-bold tracking-tight">Translation Konjac</h3>
+<span class="px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-[10px] font-bold rounded-full uppercase">Essential</span>
+</div>
+<p class="text-[#89616f] dark:text-gray-400 text-sm leading-relaxed">Eat this delicious jelly and speak any language instantly across the universe!</p>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex items-center gap-1 text-purple-500">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+<span class="text-xs font-bold">100+ Languages</span>
+</div>
+<button onclick="activateGadget('Translation Konjac')" class="flex items-center gap-2 px-6 py-2 bg-primary text-white rounded-full font-bold text-sm shadow-lg shadow-primary/30 active:scale-95 transition-transform">
+<span>Try Gadget</span>
+<span class="material-symbols-outlined text-sm">language</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-10 px-6 py-8 bg-doraemon-blue/5 rounded-t-3xl border-t border-doraemon-blue/10">
+<h4 class="text-doraemon-blue font-bold text-sm flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-sm">info</span>
+Did you know?
+</h4>
+<p class="text-[#89616f] dark:text-gray-400 text-xs leading-relaxed italic">
+Doraemon's 4D pocket contains over 4,500 unique gadgets from the 22nd century. Each one is designed by the Future Robotics Corporation!
+</p>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-background-dark/90 backdrop-blur-xl border-t border-gray-100 dark:border-gray-800 pb-8 pt-2 z-50">
+<div class="max-w-md mx-auto flex justify-around items-center px-6">
+<a class="flex flex-col items-center gap-1 text-doraemon-blue" href="#">
+<span class="material-symbols-outlined text-2xl fill-1">science</span>
+<span class="text-[10px] font-bold">Lab</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-gray-400 hover:text-doraemon-blue transition-colors" href="dance.html">
+<span class="material-symbols-outlined text-2xl">rocket_launch</span>
+<span class="text-[10px] font-bold">Shinchan</span>
+</a>
+<div class="relative -top-6">
+<a href="index.html" class="size-14 bg-primary text-white rounded-full flex items-center justify-center shadow-xl shadow-primary/40 ring-4 ring-white dark:ring-background-dark">
+<span class="material-symbols-outlined text-3xl">home</span>
+</a>
+</div>
+<a class="flex flex-col items-center gap-1 text-gray-400 hover:text-doraemon-blue transition-colors" href="box.html">
+<span class="material-symbols-outlined text-2xl">celebration</span>
+<span class="text-[10px] font-bold">Party</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-gray-400 hover:text-doraemon-blue transition-colors" href="last.html">
+<span class="material-symbols-outlined text-2xl">photo_library</span>
+<span class="text-[10px] font-bold">Memories</span>
+</a>
+</div>
+</nav>
+
+<script>
+    function activateGadget(name) {
+        let message = "";
+
+        if (name === 'Anywhere Door') {
+            message = "🚪✨ **The Anywhere Door** ✨🚪\n\n" +
+                      "Step through the frame where dreams align,\n" +
+                      "Leave all the shadows far behind.\n" +
+                      "May this door open wide and free,\n" +
+                      "To all the joy that's meant to be.\n" +
+                      "With every step, a brand new start,\n" +
+                      "Success and happiness fill your heart.";
+        } else if (name === 'Bamboo Copter') {
+            message = "🚁💨 **The Bamboo Copter** 💨🚁\n\n" +
+                      "Spinning blades against the blue,\n" +
+                      "A sky of wonder waits for you.\n" +
+                      "Rise above the doubt and fear,\n" +
+                      "The path to glory is crystal clear.\n" +
+                      "May you soar to heights unknown,\n" +
+                      "Where seeds of greatness have been sown.";
+        } else if (name === 'Translation Konjac') {
+            message = "🗣️🌐 **Translation Konjac** 🌐🗣️\n\n" +
+                      "A bite of magic, soft and sweet,\n" +
+                      "Making every connection complete.\n" +
+                      "No words are lost, no meanings hide,\n" +
+                      "With understanding by your side.\n" +
+                      "May your voice be heard, your heart be known,\n" +
+                      "In every language, a friendship grown.";
+        }
+
+        alert(message);
+    }
+</script>
+</body>
+</html>
